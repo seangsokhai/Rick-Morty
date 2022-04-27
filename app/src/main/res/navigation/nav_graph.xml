@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.rickMortyApp.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+        <action
+            android:id="@+id/action_FirstFragment_to_pageDetail"
+            app:destination="@id/pageDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/pageDetail"
+        android:name="com.example.rickMortyApp.PageDetail"
+        android:label="fragment_page_detail"
+        tools:layout="@layout/fragment_page_detail" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="species"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="created"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+        <argument
+            android:name="nameLocation"
+            app:argType="string" />
+        <argument
+            android:name="urlLocation"
+            app:argType="string" />
+        <argument
+            android:name="episode"
+            app:argType="string[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodePage"
+        android:name="com.example.rickMortyApp.EpisodePage"
+        android:label="fragment_episode_page"
+        tools:layout="@layout/fragment_episode_page" >
+        <action
+            android:id="@+id/action_episodePage_to_episodeDetailPage"
+            app:destination="@id/episodeDetailPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationPage"
+        android:name="com.example.rickMortyApp.LocationPage"
+        android:label="fragment_location_page"
+        tools:layout="@layout/fragment_location_page" >
+        <action
+            android:id="@+id/action_locationPage_to_locationDetailPage"
+            app:destination="@id/locationDetailPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodeDetailPage"
+        android:name="com.example.rickMortyApp.EpisodeDetailPage"
+        android:label="fragment_episode_detail_page"
+        tools:layout="@layout/fragment_episode_detail_page" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="airDate"
+            app:argType="string" />
+        <argument
+            android:name="created"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="episode"
+            app:argType="string" />
+        <argument
+            android:name="character"
+            app:argType="string[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationDetailPage"
+        android:name="com.example.rickMortyApp.LocationDetailPage"
+        android:label="fragment_location_detail_page"
+        tools:layout="@layout/fragment_location_detail_page" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="dimension"
+            app:argType="string" />
+        <argument
+            android:name="residents"
+            app:argType="string[]" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="created"
+            app:argType="string" />
+    </fragment>
+</navigation>
