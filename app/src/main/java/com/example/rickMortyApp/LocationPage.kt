@@ -62,7 +62,9 @@ class LocationPage : Fragment() {
             is ScreenState.Success -> {
 
                 if (state.data != null){
+
                     val adaptor = LocationAdaptor(state.data)
+                    println(">>>>>>>>$adaptor")
                     val recyclerView = view?.findViewById<RecyclerView>(R.id.recycle_location_items)
                     recyclerView?.layoutManager =
                         StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)

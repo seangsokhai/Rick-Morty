@@ -115,5 +115,32 @@
         <argument
             android:name="created"
             app:argType="string" />
+        <action
+            android:id="@+id/action_locationDetailPage_to_residentsDetail"
+            app:destination="@id/residentsDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/residentsDetail"
+        android:name="com.example.rickMortyApp.detailPage.ResidentsDetail"
+        android:label="fragment_residents_detail"
+        tools:layout="@layout/fragment_residents_detail" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+        <argument
+            android:name="created"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
     </fragment>
 </navigation>

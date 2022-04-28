@@ -1,5 +1,6 @@
 package com.example.rickMortyApp.detailPage
 
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.ResidentsAdaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
@@ -19,7 +21,7 @@ import com.example.rickMortyApp.viewmodel.MainViewModel
 
 class ResidentsDetail : Fragment() {
     private var _binding: FragmentFirstBinding? = null
-    private val arg : LocationDetailPageArgs by navArgs()
+    private val args : ResidentsDetailArgs by navArgs()
     private val binding get() = _binding!!
 
     private val viewModel: MainViewModel by lazy {
@@ -37,48 +39,28 @@ class ResidentsDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<ImageView>(R.id.image_arrow_location).setOnClickListener{
+        view.findViewById<ImageView>(R.id.image_arrow_Resident).setOnClickListener{
             requireActivity().onBackPressed()
 //            requireActivity().setResult(Activity.RESULT_OK)
 //            requireActivity().finish()
         }
 
-        val name = view.findViewById<TextView>(R.id.textLc_name)
-        val created = view.findViewById<TextView>(R.id.textLc_created)
-        val url = view.findViewById<TextView>(R.id.textLc_url)
-        val dimension = view.findViewById<TextView>(R.id.textLc_dimension)
-        val type = view.findViewById<TextView>(R.id.textLc_type)
+        val created = view.findViewById<TextView>(R.id.resident_created)
+        val gender = view.findViewById<TextView>(R.id.resident_gender)
+        val image = view.findViewById<ImageView>(R.id.resident_image)
+        val name = view.findViewById<TextView>(R.id.resident_name)
+        val type = view.findViewById<TextView>(R.id.resident_species)
+        val status = view.findViewById<TextView>(R.id.resident_status)
+        val url = view.findViewById<TextView>(R.id.resident_url)
 
-        name.text =  arg.name
-        created.text = arg.created
-        url.text = arg.url
-        dimension.text = arg.dimension
-        type.text = arg.type
-
-        // convert array string to list
-        val listResidents = arg.residents.toList().map {
-            Residents(
-                name = it, gender = null,
-                species = null, type = null ,
-                status = null, origin = null,
-                location = null , image = null ,
-                episode = null , url = null,
-                created = null
-            )
+        created.text = args.created
+        gender.text = args.gender
+        image.load(args.image){
+            transformations()
         }
-
-        val adaptor = ResidentsAdaptor(listResidents)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycle_location_detail_residents)
-
-        recyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = adaptor
-        adaptor.setOnItemClickListener(object : ResidentsAdaptor.OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                println(">> clicked")
-            }
-        }
-        )
+        name.text = args.name
+        status.text = args.status
+        url.text = args.url
 
     }
 
