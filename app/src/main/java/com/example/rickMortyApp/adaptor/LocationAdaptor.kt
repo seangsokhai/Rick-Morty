@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.network.LocationData
-import com.example.rickMortyApp.network.LocationResidents
+import com.example.rickMortyApp.network.Residents
 
 class LocationAdaptor(private val locationList: List<LocationData>): RecyclerView.Adapter<LocationAdaptor.MainViewHolder>() {
     private  lateinit var mListener: OnItemClickListener
@@ -55,7 +55,7 @@ class LocationAdaptor(private val locationList: List<LocationData>): RecyclerVie
 }
 
 
-class ResidentsAdaptor(private val residentList: List<LocationResidents>): RecyclerView.Adapter<ResidentsAdaptor.MainViewHolder>() {
+class ResidentsAdaptor(private val residentList: List<Residents>): RecyclerView.Adapter<ResidentsAdaptor.MainViewHolder>() {
     private  lateinit var mListener: OnItemClickListener
 
     interface OnItemClickListener{
@@ -71,10 +71,10 @@ class ResidentsAdaptor(private val residentList: List<LocationResidents>): Recyc
                 listener.onItemClick(adapterPosition)
             }
         }
-        fun bindData(locationResidents: LocationResidents){
+        fun bindData(residents: Residents){
             val name = itemView.findViewById<TextView>(R.id.detail_location_resident)
             //adapt view with model json
-            name.text = locationResidents.name
+            name.text = residents.name
         }
     }
 

@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/fragment_location_detail_page.xml" value="0.2572463768115942" />
         <entry key="app/src/main/res/layout/fragment_location_page.xml" value="0.3265625" />
         <entry key="app/src/main/res/layout/fragment_page_detail.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout/fragment_residents_detail.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/item_custom_row.xml" value="0.3265625" />
         <entry key="app/src/main/res/layout/item_episode_page.xml" value="0.33177083333333335" />
         <entry key="app/src/main/res/layout/item_location_page.xml" value="0.3265625" />

@@ -1,7 +1,6 @@
 package com.example.rickMortyApp.detailPage
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.ResidentsAdaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
-import com.example.rickMortyApp.network.*
+import com.example.rickMortyApp.network.Residents
 import com.example.rickMortyApp.viewmodel.MainViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class LocationDetailPage : Fragment() {
+class ResidentsDetail : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val arg : LocationDetailPageArgs by navArgs()
     private val binding get() = _binding!!
@@ -35,7 +31,7 @@ class LocationDetailPage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_location_detail_page, container, false)
+        return inflater.inflate(R.layout.fragment_residents_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,5 +83,3 @@ class LocationDetailPage : Fragment() {
     }
 
 }
-
-
