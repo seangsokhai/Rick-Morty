@@ -36,6 +36,4 @@ interface ApiService{
     @GET("episode/")
     fun fetchEpisode(@Query("page") page:String): Call<EpisodeResponse>
 
-
-
 }

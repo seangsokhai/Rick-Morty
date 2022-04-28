@@ -23,7 +23,6 @@ class MainViewModel(private val repository: Repository = Repository(ApiClient.ap
     val episodeLiveData: LiveData<ScreenState<List<EpisodeData>?>>
         get() = _episodeLiveData
 
-
     init {
         fetchCharacter()
         fetchLocation()
@@ -57,17 +56,16 @@ class MainViewModel(private val repository: Repository = Repository(ApiClient.ap
         _locationLiveData.postValue(ScreenState.Loading(null))
         client.enqueue(object : Callback<LocationResponse>{
             override fun onFailure(call: Call<LocationResponse>, t: Throwable) {
-                throw(Error("Location: ${t.message.toString()}"))
+
                 _locationLiveData.postValue(ScreenState.Error(t.message.toString(),null))
+                throw(Error("Location: ${t.message.toString()}"))
             }
             override fun onResponse(
                 call: Call<LocationResponse>,
                 response: Response<LocationResponse>
             ) {
                 if (response.isSuccessful){
-
                     _locationLiveData.postValue(ScreenState.Success(response.body()?.results))
-
                 } else {
                     _locationLiveData.postValue(ScreenState.Error(response.code().toString()))
                 }

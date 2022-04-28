@@ -4,21 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.ProgressBar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickMortyApp.adaptor.Adaptor
 import com.example.rickMortyApp.adaptor.EpisodeAdaptor
 import com.example.rickMortyApp.databinding.FragmentEpisodePageBinding
-import com.example.rickMortyApp.databinding.FragmentFirstBinding
 import com.example.rickMortyApp.network.EpisodeData
 import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class EpisodePage : Fragment() {
@@ -27,13 +25,6 @@ class EpisodePage : Fragment() {
     }
     private var _binding: FragmentEpisodePageBinding? = null
     private val binding get() = _binding!!
-    lateinit var searchView: SearchView
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,10 +41,10 @@ class EpisodePage : Fragment() {
         }
     }
     private fun processLocationResponse(state: ScreenState<List<EpisodeData>?>){
-
+        val pb = view?.findViewById<ProgressBar>(R.id.process_bar_episode_page)
         when(state){
             is ScreenState.Loading ->{
-                println("loadingfffffffffEEEEEEEEE")
+                pb?.visibility = View.VISIBLE
             }
             is ScreenState.Success -> {
 
@@ -75,7 +66,6 @@ class EpisodePage : Fragment() {
                             val episodeEpisode = state.data[position].episode
                             // episode list of string
                             val episodeCharacter = state.data[position].characters
-//                            println("dataName $dataEpisode")
 
                             findNavController().navigate(R.id.episodeDetailPage, bundleOf(
                                 "name" to episodeName,
@@ -87,26 +77,11 @@ class EpisodePage : Fragment() {
                             ))
                             }
                     })
-//                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//                        override fun onQueryTextSubmit(query: String): Boolean {
-//                            val list = state.data.toString()
-//                            searchView.clearFocus()
-//                            if (list.contains(query)) {
-//                                adaptor.filter.filter(query)
-//                            } else {
-//                                Toast.makeText(context, "No Match found", Toast.LENGTH_LONG).show()
-//                            }
-//                            return false
-//                        }
-//                        override fun onQueryTextChange(newText: String): Boolean {
-//                            adaptor.filter.filter(newText)
-//                            return false
-//                        }
-//                    })
                 }
             } is ScreenState.Error -> {
-            println("error")
-
+                pb?.visibility = View.GONE
+                val view = pb?.rootView
+                Snackbar.make(view!!,state.message.toString(),Snackbar.LENGTH_LONG).show()
         }
         }
     }

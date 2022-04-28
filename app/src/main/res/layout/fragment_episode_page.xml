@@ -36,6 +36,13 @@ android:background="@color/white"
                 android:layout_marginTop="15sp"
                 android:background="@drawable/bg_search"
                 />
+        <ProgressBar
+            android:id="@+id/process_bar_episode_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_episode_items"

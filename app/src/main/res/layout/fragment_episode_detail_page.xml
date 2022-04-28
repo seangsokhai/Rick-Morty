@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".EpisodeDetailPage">
+    tools:context=".detailPage.EpisodeDetailPage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             >
 
             <ImageView
-                android:id="@+id/image_arrow"
+                android:id="@+id/image_arrow_episode"
                 android:layout_width="32sp"
                 android:layout_height="32sp"
                 android:layout_marginStart="16sp"

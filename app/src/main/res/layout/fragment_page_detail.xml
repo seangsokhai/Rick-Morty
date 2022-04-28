@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".PageDetail"
+    tools:context=".detailPage.PageDetail"
     >
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 >
 
                 <ImageView
-                    android:id="@+id/image_arrow"
+                    android:id="@+id/image_arrow_home"
                     android:layout_width="32sp"
                     android:layout_height="32sp"
                     android:layout_marginStart="16sp"
@@ -155,17 +155,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-                <TextView
-                    android:id="@+id/detail_episode"
-                    android:text="@string/hyperLinkEpisode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5sp"
-                    android:fontFamily="sans-serif-thin"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/detailUrl2"
                     android:layout_width="match_parent"
@@ -187,6 +177,28 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <TextView-->
+<!--                    android:id="@+id/detail_episode"-->
+<!--                    android:text="@string/hyperLinkEpisode"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5sp"-->
+<!--                    android:fontFamily="sans-serif-thin"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle_view_list_string_home_page"
+                    android:layout_marginTop="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/list_string_home_page_detail"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:itemCount="20"
                     app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

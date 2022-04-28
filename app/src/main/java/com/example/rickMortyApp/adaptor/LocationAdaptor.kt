@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.network.LocationData
+import com.example.rickMortyApp.network.LocationResidents
 
 class LocationAdaptor(private val locationList: List<LocationData>): RecyclerView.Adapter<LocationAdaptor.MainViewHolder>() {
     private  lateinit var mListener: OnItemClickListener
@@ -49,6 +50,45 @@ class LocationAdaptor(private val locationList: List<LocationData>): RecyclerVie
 
     override fun getItemCount(): Int {
         return locationList.size
+    }
+
+}
+
+
+class ResidentsAdaptor(private val residentList: List<LocationResidents>): RecyclerView.Adapter<ResidentsAdaptor.MainViewHolder>() {
+    private  lateinit var mListener: OnItemClickListener
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
+    }
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        mListener = listener
+    }
+
+    inner class MainViewHolder(itemView: View, private val listener: OnItemClickListener): RecyclerView.ViewHolder(itemView)  {
+        init {
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
+            }
+        }
+        fun bindData(locationResidents: LocationResidents){
+            val name = itemView.findViewById<TextView>(R.id.detail_location_resident)
+            //adapt view with model json
+            name.text = locationResidents.name
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_location_residents , parent ,false)
+        return MainViewHolder(view, mListener)
+    }
+
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        return holder.bindData(residentList[position])
+    }
+
+    override fun getItemCount(): Int {
+        return residentList.size
     }
 
 }

@@ -1,19 +1,16 @@
-package com.example.rickMortyApp
+package com.example.rickMortyApp.detailPage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.rickMortyApp.adaptor.EpiDetailAdaptor
+import com.example.rickMortyApp.R
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
-import com.example.rickMortyApp.network.EpisodeData
-import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.MainViewModel
 
 
@@ -39,6 +36,13 @@ class EpisodeDetailPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<ImageView>(R.id.image_arrow_episode).setOnClickListener{
+            requireActivity().onBackPressed()
+            //            requireActivity().setResult(Activity.RESULT_OK)
+            //            requireActivity().finish()
+        }
+
 
         val name = view.findViewById<TextView>(R.id.textEp_name)
         val airDate = view.findViewById<TextView>(R.id.textEp_airDate)

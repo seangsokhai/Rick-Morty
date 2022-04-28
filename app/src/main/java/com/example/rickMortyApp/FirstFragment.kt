@@ -99,10 +99,8 @@ class FirstFragment : Fragment()  {
                 pd.visibility = View.GONE
                 val view = pd.rootView
                 Snackbar.make(view,state.message.toString(),Snackbar.LENGTH_LONG).show()
+            }
         }
-        }
-
-
     }
 }
 

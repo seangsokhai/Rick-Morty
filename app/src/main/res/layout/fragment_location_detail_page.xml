@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LocationDetailPage">
+    tools:context=".detailPage.LocationDetailPage">
 
 <!--    <androidx.appcompat.widget.Toolbar-->
 <!--        android:layout_width="match_parent"-->
@@ -25,7 +25,7 @@
             >
 
             <ImageView
-                android:id="@+id/image_arrow"
+                android:id="@+id/image_arrow_location"
                 android:layout_width="32sp"
                 android:layout_height="32sp"
                 android:layout_marginStart="16sp"
@@ -137,23 +137,12 @@ remaining essentially unchanged. "
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            <TextView
-                android:id="@+id/textLc_residents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:fontFamily="sans-serif-thin"
-                android:text="created : 2017-11-10T12:42:04.162Z"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle_location_detail"
+                android:id="@+id/recycle_location_detail_residents"
                 android:layout_marginTop="15sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_custom_row"
+                tools:listitem="@layout/item_location_residents"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/pageDetail"
-        android:name="com.example.rickMortyApp.PageDetail"
+        android:name="com.example.rickMortyApp.detailPage.PageDetail"
         android:label="fragment_page_detail"
         tools:layout="@layout/fragment_page_detail" >
         <argument
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/episodeDetailPage"
-        android:name="com.example.rickMortyApp.EpisodeDetailPage"
+        android:name="com.example.rickMortyApp.detailPage.EpisodeDetailPage"
         android:label="fragment_episode_detail_page"
         tools:layout="@layout/fragment_episode_detail_page" >
         <argument
@@ -94,7 +94,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationDetailPage"
-        android:name="com.example.rickMortyApp.LocationDetailPage"
+        android:name="com.example.rickMortyApp.detailPage.LocationDetailPage"
         android:label="fragment_location_detail_page"
         tools:layout="@layout/fragment_location_detail_page" >
         <argument

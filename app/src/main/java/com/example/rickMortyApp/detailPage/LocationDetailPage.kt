@@ -1,6 +1,7 @@
-package com.example.rickMortyApp
+package com.example.rickMortyApp.detailPage
 
-import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +11,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.rickMortyApp.R
+import com.example.rickMortyApp.adaptor.ResidentsAdaptor
+import com.example.rickMortyApp.adaptor.StringAdaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
+import com.example.rickMortyApp.network.LocationResidents
 import com.example.rickMortyApp.viewmodel.MainViewModel
 
 class LocationDetailPage : Fragment() {
@@ -33,7 +40,7 @@ class LocationDetailPage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<ImageView>(R.id.image_arrow).setOnClickListener{
+        view.findViewById<ImageView>(R.id.image_arrow_location).setOnClickListener{
             requireActivity().onBackPressed()
 //            requireActivity().setResult(Activity.RESULT_OK)
 //            requireActivity().finish()
@@ -44,43 +51,40 @@ class LocationDetailPage : Fragment() {
         val url = view.findViewById<TextView>(R.id.textLc_url)
         val dimension = view.findViewById<TextView>(R.id.textLc_dimension)
         val type = view.findViewById<TextView>(R.id.textLc_type)
-        val residents = view.findViewById<TextView>(R.id.textLc_residents)
 
         name.text =  arg.name
         created.text = arg.created
         url.text = arg.url
         dimension.text = arg.dimension
         type.text = arg.type
-        residents.text = arg.residents[0]
 
-//        viewModel.episodeLiveData.observe(viewLifecycleOwner) { state ->
-//            processRecyclerCharacter(state)
-//        }
+        // convert array string to list
+        val listResidents = arg.residents.toList().map {
+            LocationResidents(
+                name = it, gender = null,
+                species = null, type = null ,
+                status = null, origin = null,
+                location = null , image = null ,
+                episode = null , url = null,
+                created = null
+            )
+        }
+
+        val adaptor = ResidentsAdaptor(listResidents)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycle_location_detail_residents)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.adapter = adaptor
+        adaptor.setOnItemClickListener(object : ResidentsAdaptor.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                println(">> clicked")
+//                val intent = Intent(Intent.ACTION_VIEW)
+//                intent.data = Uri.parse(args.episode[position])
+//                startActivity(intent)
+            }
+        }
+        )
+
 
     }
-//    private fun processRecyclerCharacter(state: ScreenState<List<EpisodeData>?>){
-//
-//        when(state){
-//            is ScreenState.Loading ->{
-//            }
-//            is ScreenState.Success -> {
-//                if (state.data != null){
-//                    val adaptor = EpisodeAdaptor(state.data)
-//                    val recyclerView = view?.findViewById<RecyclerView>(R.id.recycle_location_detail)
-//                    recyclerView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-//                    recyclerView?.adapter = adaptor
-//                    adaptor.setOnItemClickListener(object : EpisodeAdaptor.OnItemClickListener{
-//                        override fun onItemClick(position: Int) {
-//                            println("get click")
-//                        }
-//                    })
-//                }
-//            } is ScreenState.Error -> {
-//        }
-//        }
-//
-//
-//    }
-
-
 }

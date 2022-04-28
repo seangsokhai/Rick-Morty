@@ -1,28 +1,24 @@
 package com.example.rickMortyApp
 
-import android.net.Uri
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.rickMortyApp.adaptor.Adaptor
-import com.example.rickMortyApp.adaptor.EpisodeAdaptor
 import com.example.rickMortyApp.adaptor.LocationAdaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
-import com.example.rickMortyApp.network.Character
 import com.example.rickMortyApp.network.LocationData
 import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import org.xml.sax.Locator
 
 class LocationPage : Fragment() {
     private val viewModel: MainViewModel by lazy {
@@ -57,10 +53,11 @@ class LocationPage : Fragment() {
         }
     }
     private fun processLocationResponse(state: ScreenState<List<LocationData>?>){
+        val pd = view?.findViewById<ProgressBar>(R.id.process_bar_location_page)
 
         when(state){
             is ScreenState.Loading ->{
-                println("loadingfffffffff")
+                pd?.visibility = View.VISIBLE
             }
             is ScreenState.Success -> {
 
@@ -78,6 +75,8 @@ class LocationPage : Fragment() {
                             val locationUrl = state.data[position].url
                             val locationType = state.data[position].type
                             val locationDimension = state.data[position].dimension
+
+
                             val locationResidents = state.data[position].residents
 
                             findNavController().navigate(R.id.locationDetailPage, bundleOf(
@@ -87,14 +86,16 @@ class LocationPage : Fragment() {
                                 "type" to locationType,
                                 "dimension" to locationDimension,
                                 "residents" to locationResidents.toTypedArray()
-                            ))
-                            print("click")
+                                )
+                            )
                         }
                     })
 
                 }
             } is ScreenState.Error -> {
-                println("loadingggggggggg")
+                pd?.visibility = View.GONE
+                val view = pd?.rootView
+                Snackbar.make(view!!,state.message.toString(),Snackbar.LENGTH_LONG).show()
 
             }
         }
