@@ -34,7 +34,7 @@ class MainViewModel(private val repository: Repository = Repository(ApiClient.ap
         println("character ${client.request()}")
         _characterLiveData.postValue(ScreenState.Loading(null))
         client.enqueue(object : Callback<CharacterResponse>{
-            override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
+            override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {1
                 throw(Error("Character: ${t.message.toString()}"))
                 _characterLiveData.postValue(ScreenState.Error(t.message.toString(),null))
             }

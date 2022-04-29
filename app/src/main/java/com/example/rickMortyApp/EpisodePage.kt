@@ -1,10 +1,10 @@
 package com.example.rickMortyApp
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
+import android.widget.SearchView
+import android.widget.SearchView.OnQueryTextListener
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,7 +20,7 @@ import com.example.rickMortyApp.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
-class EpisodePage : Fragment() {
+class EpisodePage : Fragment(), SearchView.OnQueryTextListener {
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
@@ -41,7 +41,21 @@ class EpisodePage : Fragment() {
         viewModel.episodeLiveData.observe(viewLifecycleOwner) { state ->
             processLocationResponse(state)
         }
+
+
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        val search = menu.findItem(R.menu.menu_main)
+        val searchView = search.actionView as SearchView
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(this)
+
+
+
+    }
+
     private fun processLocationResponse(state: ScreenState<List<EpisodeData>?>){
         val pb = binding.processBarEpisodePage
         when(state){
@@ -58,6 +72,7 @@ class EpisodePage : Fragment() {
                     recyclerView?.layoutManager =
                         LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
                     recyclerView?.adapter = adaptor
+
 
                     adaptor.setOnItemClickListener(object : EpisodeAdaptor.OnItemClickListener{
                         override fun onItemClick(position: Int) {
@@ -86,5 +101,35 @@ class EpisodePage : Fragment() {
                 Snackbar.make(view!!,state.message.toString(),Snackbar.LENGTH_LONG).show()
         }
         }
+    }
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        if (p0 != null) {
+            searchDatabase(p0)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        if (p0 != null) {
+            searchDatabase(p0)
+        }
+        return true
+    }
+
+    private fun searchDatabase(p0: String?){
+        val searchQuery = "%$p0"
+        /**
+         * search value
+         * send to api
+         * api return data
+         * data shows in list
+         */
+
+//        viewModel.episodeLiveData.searchDatabase(searchQuery).observe(viewLifecycleOwner) { state ->
+//            state.let {
+//                EpisodeAdaptor.setData(it)
+//            }
+//        }
     }
 }
