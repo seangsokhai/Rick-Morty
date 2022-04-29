@@ -28,7 +28,7 @@ data class LocationJson(
 )
 
 data class ResidentsResponse(@field:Json(name = "residents")
-                                     val residents: Residents
+                                     val residents: List<Residents>
 )
 
 

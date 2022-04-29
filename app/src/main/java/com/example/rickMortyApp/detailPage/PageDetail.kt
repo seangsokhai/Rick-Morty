@@ -62,7 +62,7 @@ class PageDetail : Fragment() {
     val url = binding.detailUrl
     val nameLocation = binding.detailName2
     val urlLocation = binding.detailUrl2
-    val episode = binding.recycleViewListStringHomePage
+
 
 
     name.text = args.name

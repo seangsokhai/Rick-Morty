@@ -19,15 +19,7 @@ import com.example.rickMortyApp.adaptor.ResidentsAdaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
 import com.example.rickMortyApp.network.*
 import com.example.rickMortyApp.viewmodel.MainViewModel
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
+
 
 class LocationDetailPage : Fragment() {
     private var _binding: FragmentFirstBinding? = null
@@ -68,49 +60,46 @@ class LocationDetailPage : Fragment() {
         type.text = arg.type
 
         // convert array string to list
-        val listResidents = arg.residents.toList().map {
-            Residents(
-                name = it, gender = it,
-                species = null, type = null ,
-                status = it, origin = null,
-                location = null , image = it ,
-                episode = null , url = it,
-                created = it
-            )
-        }
-
+//        val listResidents = arg.residents.toList().map {
+//            Residents(
+//                name = it, gender = it,
+//                species = null, type = null ,
+//                status = it, origin = null,
+//                location = null , image = it ,
+//                episode = null , url = it,
+//                created = it
+//            )
+//        }
+        val listResidents = arg.residents.toList()
         val adaptor = ResidentsAdaptor(listResidents)
         println(">>>>> $adaptor")
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycle_location_detail_residents)
-
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adaptor
         adaptor.setOnItemClickListener(object : ResidentsAdaptor.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val residentName =  listResidents[position].name
-                val residentImage = listResidents[position].image
-                val residentCreated = listResidents[position].created
-                val residentStatus = listResidents[position].status
-                val residentUrl = listResidents[position].url
-                val residentGender = listResidents[position].gender
-
                 findNavController().navigate(R.id.residentsDetail, bundleOf(
-                    "name" to residentName,
-                    "image" to residentImage,
-                    "created" to residentCreated,
-                    "status" to residentStatus,
-                    "url" to residentUrl,
-                    "gender" to residentGender
-                )
-                )
-
+                    "listResidents" to listResidents[position]
+                ))
+//                val residentName =  listResidents[position].name
+//                val residentImage = listResidents[position].image
+//                val residentCreated = listResidents[position].created
+//                val residentStatus = listResidents[position].status
+//                val residentUrl = listResidents[position].url
+//                val residentGender = listResidents[position].gender
+//
+//                findNavController().navigate(R.id.residentsDetail, bundleOf(
+//                    "name" to residentName,
+//                    "image" to residentImage,
+//                    "created" to residentCreated,
+//                    "status" to residentStatus,
+//                    "url" to residentUrl,
+//                    "gender" to residentGender
+//                )
+//                )
             }
-        }
-        )
 
+        })
     }
-
 }
-
-

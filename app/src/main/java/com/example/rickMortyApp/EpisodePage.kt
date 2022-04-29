@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickMortyApp.adaptor.EpisodeAdaptor
 import com.example.rickMortyApp.databinding.FragmentEpisodePageBinding
+import com.example.rickMortyApp.databinding.FragmentLocationPageBinding
 import com.example.rickMortyApp.network.EpisodeData
 import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.MainViewModel
@@ -29,9 +30,10 @@ class EpisodePage : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_episode_page, container, false)
+        _binding = FragmentEpisodePageBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,10 +43,10 @@ class EpisodePage : Fragment() {
         }
     }
     private fun processLocationResponse(state: ScreenState<List<EpisodeData>?>){
-        val pb = view?.findViewById<ProgressBar>(R.id.process_bar_episode_page)
+        val pb = binding.processBarEpisodePage
         when(state){
             is ScreenState.Loading ->{
-                pb?.visibility = View.VISIBLE
+                pb.visibility = View.VISIBLE
             }
             is ScreenState.Success -> {
 
@@ -79,8 +81,8 @@ class EpisodePage : Fragment() {
                     })
                 }
             } is ScreenState.Error -> {
-                pb?.visibility = View.GONE
-                val view = pb?.rootView
+                pb.visibility = View.GONE
+                val view = pb.rootView
                 Snackbar.make(view!!,state.message.toString(),Snackbar.LENGTH_LONG).show()
         }
         }

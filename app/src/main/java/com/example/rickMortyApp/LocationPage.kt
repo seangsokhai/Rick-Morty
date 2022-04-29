@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.rickMortyApp.adaptor.LocationAdaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
+import com.example.rickMortyApp.databinding.FragmentLocationPageBinding
 import com.example.rickMortyApp.network.LocationData
 import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.MainViewModel
@@ -24,26 +25,18 @@ class LocationPage : Fragment() {
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentLocationPageBinding? = null
     private val binding get() = _binding!!
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        // Handle the returned Uri
-        println(result)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentLocationPageBinding.inflate(inflater, container, false)
+        return binding.root
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_location_page, container, false)
+//        return inflater.inflate(R.layout.fragment_location_page, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,11 +46,10 @@ class LocationPage : Fragment() {
         }
     }
     private fun processLocationResponse(state: ScreenState<List<LocationData>?>){
-        val pd = view?.findViewById<ProgressBar>(R.id.process_bar_location_page)
-
+        val pd = binding.processBarLocationPage
         when(state){
             is ScreenState.Loading ->{
-                pd?.visibility = View.VISIBLE
+                pd.visibility = View.VISIBLE
             }
             is ScreenState.Success -> {
 
@@ -95,9 +87,9 @@ class LocationPage : Fragment() {
 
                 }
             } is ScreenState.Error -> {
-                pd?.visibility = View.GONE
-                val view = pd?.rootView
-                Snackbar.make(view!!,state.message.toString(),Snackbar.LENGTH_LONG).show()
+                pd.visibility = View.GONE
+                val view = pd.rootView
+                Snackbar.make(view,state.message.toString(),Snackbar.LENGTH_LONG).show()
 
             }
         }

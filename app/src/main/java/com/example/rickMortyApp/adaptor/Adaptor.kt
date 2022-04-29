@@ -84,7 +84,6 @@ class StringAdaptor(private val characterList: List<String>): RecyclerView.Adapt
         }
         fun bindData(value: String){
             val name = itemView.findViewById<TextView>(R.id.detail_episode)
-
             //adapt view with model json
             name.text = value
         }
