@@ -16,13 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.ResidentsAdaptor
+import com.example.rickMortyApp.databinding.FragmentEpisodePageBinding
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
+import com.example.rickMortyApp.databinding.FragmentLocationPageBinding
 import com.example.rickMortyApp.network.*
 import com.example.rickMortyApp.viewmodel.MainViewModel
 
 
 class LocationDetailPage : Fragment() {
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentLocationPageBinding? = null
     private val arg : LocationDetailPageArgs by navArgs()
     private val binding get() = _binding!!
 
@@ -33,9 +35,10 @@ class LocationDetailPage : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_location_detail_page, container, false)
+        _binding = FragmentLocationPageBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
