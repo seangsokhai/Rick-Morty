@@ -1,14 +1,13 @@
-package com.example.rickMortyApp
+package com.example.rickMortyApp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
-import android.view.MenuItem
 import androidx.navigation.ui.setupWithNavController
+import com.example.rickMortyApp.R
 import com.example.rickMortyApp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

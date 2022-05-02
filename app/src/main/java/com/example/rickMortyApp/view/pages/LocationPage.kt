@@ -1,4 +1,4 @@
-package com.example.rickMortyApp
+package com.example.rickMortyApp.view.pages
 
 
 import android.os.Bundle
@@ -6,24 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.LocationAdaptor
-import com.example.rickMortyApp.databinding.FragmentFirstBinding
 import com.example.rickMortyApp.databinding.FragmentLocationPageBinding
 import com.example.rickMortyApp.network.LocationData
 import com.example.rickMortyApp.ulti.ScreenState
-import com.example.rickMortyApp.viewmodel.MainViewModel
+import com.example.rickMortyApp.viewmodel.LocationViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class LocationPage : Fragment() {
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+    private val viewModel: LocationViewModel by lazy {
+        ViewModelProvider(this)[LocationViewModel::class.java]
     }
     private var _binding: FragmentLocationPageBinding? = null
     private val binding get() = _binding!!
@@ -52,6 +50,7 @@ class LocationPage : Fragment() {
                 pd.visibility = View.VISIBLE
             }
             is ScreenState.Success -> {
+                pd.visibility = View.GONE
 
                 if (state.data != null){
 
@@ -73,7 +72,8 @@ class LocationPage : Fragment() {
 
                             val locationResidents = state.data[position].residents
 
-                            findNavController().navigate(R.id.locationDetailPage, bundleOf(
+                            findNavController().navigate(
+                                R.id.locationDetailPage, bundleOf(
                                 "name" to locationName,
                                 "created" to locationCreated,
                                 "url" to locationUrl,

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.rickMortyApp.FirstFragment"
+        android:name="com.example.rickMortyApp.view.pages.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/pageDetail"
-        android:name="com.example.rickMortyApp.detailPage.PageDetail"
+        android:name="com.example.rickMortyApp.view.detailPage.character.PageDetail"
         android:label="fragment_page_detail"
         tools:layout="@layout/fragment_page_detail" >
         <argument
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/episodePage"
-        android:name="com.example.rickMortyApp.EpisodePage"
+        android:name="com.example.rickMortyApp.view.pages.EpisodePage"
         android:label="fragment_episode_page"
         tools:layout="@layout/fragment_episode_page" >
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationPage"
-        android:name="com.example.rickMortyApp.LocationPage"
+        android:name="com.example.rickMortyApp.view.pages.LocationPage"
         android:label="fragment_location_page"
         tools:layout="@layout/fragment_location_page" >
         <action
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/episodeDetailPage"
-        android:name="com.example.rickMortyApp.detailPage.EpisodeDetailPage"
+        android:name="com.example.rickMortyApp.view.detailPage.episode.EpisodeDetailPage"
         android:label="fragment_episode_detail_page"
         tools:layout="@layout/fragment_episode_detail_page" >
         <argument
@@ -91,10 +91,13 @@
         <argument
             android:name="character"
             app:argType="string[]" />
+        <action
+            android:id="@+id/action_episodeDetailPage_to_episodeListOfCharacter"
+            app:destination="@id/episodeListOfCharacter" />
     </fragment>
     <fragment
         android:id="@+id/locationDetailPage"
-        android:name="com.example.rickMortyApp.detailPage.LocationDetailPage"
+        android:name="com.example.rickMortyApp.view.detailPage.location.LocationDetailPage"
         android:label="fragment_location_detail_page"
         tools:layout="@layout/fragment_location_detail_page" >
         <argument
@@ -121,7 +124,7 @@
     </fragment>
     <fragment
         android:id="@+id/residentsDetail"
-        android:name="com.example.rickMortyApp.detailPage.ResidentsDetail"
+        android:name="com.example.rickMortyApp.view.detailPage.location.ResidentsDetail"
         android:label="fragment_residents_detail"
         tools:layout="@layout/fragment_residents_detail" >
         <argument
@@ -138,6 +141,36 @@
             app:argType="string" />
         <argument
             android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="species"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodeListOfCharacter"
+        android:name="com.example.rickMortyApp.view.detailPage.episode.EpisodeListOfCharacter"
+        android:label="fragment_episode_list_of_character"
+        tools:layout="@layout/fragment_episode_list_of_character" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="created"
+            app:argType="string" />
+        <argument
+            android:name="species"
+            app:argType="string" />
+        <argument
+            android:name="gender"
             app:argType="string" />
         <argument
             android:name="image"

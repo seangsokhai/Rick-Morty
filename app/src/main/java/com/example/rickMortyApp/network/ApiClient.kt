@@ -29,6 +29,9 @@ interface ApiService{
     @GET("character")
     fun fetchCharacter(@Query("page") page:String): Call<CharacterResponse>
 
+    @GET("character")
+    fun fetchSingleCharacter(@Query("page") page: String): Call<CharacterResponse>
+
     @GET("location")
     fun fetchLocation(@Query("page") page:String): Call<LocationResponse>
 

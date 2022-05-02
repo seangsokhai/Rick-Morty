@@ -1,4 +1,4 @@
-package com.example.rickMortyApp.detailPage
+package com.example.rickMortyApp.view.detailPage.character
 
 import android.content.Intent
 import android.net.Uri
@@ -7,33 +7,20 @@ import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.ImageView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.rickMortyApp.R
-import com.example.rickMortyApp.adaptor.Adaptor
 import com.example.rickMortyApp.adaptor.StringAdaptor
 import com.example.rickMortyApp.databinding.FragmentPageDetailBinding
-import com.example.rickMortyApp.network.Character
-import com.example.rickMortyApp.ulti.ScreenState
-import com.example.rickMortyApp.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
 
 class PageDetail : Fragment() {
     private var _binding: FragmentPageDetailBinding? = null
     private val args: PageDetailArgs by navArgs()
     private val binding get() = _binding!!
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

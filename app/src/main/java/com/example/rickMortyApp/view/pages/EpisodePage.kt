@@ -1,28 +1,25 @@
-package com.example.rickMortyApp
+package com.example.rickMortyApp.view.pages
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ProgressBar
-import android.widget.SearchView
-import android.widget.SearchView.OnQueryTextListener
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.EpisodeAdaptor
 import com.example.rickMortyApp.databinding.FragmentEpisodePageBinding
-import com.example.rickMortyApp.databinding.FragmentLocationPageBinding
 import com.example.rickMortyApp.network.EpisodeData
 import com.example.rickMortyApp.ulti.ScreenState
-import com.example.rickMortyApp.viewmodel.MainViewModel
+import com.example.rickMortyApp.viewmodel.EpisodeViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
-class EpisodePage : Fragment(), SearchView.OnQueryTextListener {
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+class EpisodePage : Fragment() {
+    private val viewModel: EpisodeViewModel by lazy {
+        ViewModelProvider(this)[EpisodeViewModel::class.java]
     }
     private var _binding: FragmentEpisodePageBinding? = null
     private val binding get() = _binding!!
@@ -38,21 +35,10 @@ class EpisodePage : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.episodeLiveData.observe(viewLifecycleOwner) { state ->
             processLocationResponse(state)
         }
-
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        val search = menu.findItem(R.menu.menu_main)
-        val searchView = search.actionView as SearchView
-        searchView.isSubmitButtonEnabled = true
-        searchView.setOnQueryTextListener(this)
-
-
 
     }
 
@@ -63,7 +49,7 @@ class EpisodePage : Fragment(), SearchView.OnQueryTextListener {
                 pb.visibility = View.VISIBLE
             }
             is ScreenState.Success -> {
-
+                pb.visibility = View.GONE
                 println(">> data ${state.data}")
 
                 if (state.data != null){
@@ -84,7 +70,8 @@ class EpisodePage : Fragment(), SearchView.OnQueryTextListener {
                             // episode list of string
                             val episodeCharacter = state.data[position].characters
 
-                            findNavController().navigate(R.id.episodeDetailPage, bundleOf(
+                            findNavController().navigate(
+                                R.id.episodeDetailPage, bundleOf(
                                 "name" to episodeName,
                                 "airDate" to episodeAirDate,
                                 "created" to episodeCreated,
@@ -102,34 +89,6 @@ class EpisodePage : Fragment(), SearchView.OnQueryTextListener {
         }
         }
     }
-
-    override fun onQueryTextSubmit(p0: String?): Boolean {
-        if (p0 != null) {
-            searchDatabase(p0)
-        }
-        return true
-    }
-
-    override fun onQueryTextChange(p0: String?): Boolean {
-        if (p0 != null) {
-            searchDatabase(p0)
-        }
-        return true
-    }
-
-    private fun searchDatabase(p0: String?){
-        val searchQuery = "%$p0"
-        /**
-         * search value
-         * send to api
-         * api return data
-         * data shows in list
-         */
-
-//        viewModel.episodeLiveData.searchDatabase(searchQuery).observe(viewLifecycleOwner) { state ->
-//            state.let {
-//                EpisodeAdaptor.setData(it)
-//            }
-//        }
-    }
 }
+
+
