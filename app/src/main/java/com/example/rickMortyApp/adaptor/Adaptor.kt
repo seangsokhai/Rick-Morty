@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.network.Character
-import com.example.rickMortyApp.network.Location
-import kotlinx.coroutines.joinAll
+
 
 class Adaptor(private val characterList: List<Character>): RecyclerView.Adapter<Adaptor.MainViewHolder>() {
     private  lateinit var mListener: OnItemClickListener
@@ -48,6 +46,9 @@ class Adaptor(private val characterList: List<Character>): RecyclerView.Adapter<
             image.load(character.image){
                 transformations()
             }
+
+            //adapt view with model json
+
         }
     }
 

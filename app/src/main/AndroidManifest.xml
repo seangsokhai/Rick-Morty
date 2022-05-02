@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RickMortyApp">
         <activity
-            android:name="com.example.rickMortyApp.MainActivity"
+            android:name="com.example.rickMortyApp.view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.RickMortyApp.NoActionBar">
             <intent-filter>

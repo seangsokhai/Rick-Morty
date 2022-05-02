@@ -1,4 +1,4 @@
-package com.example.rickMortyApp
+package com.example.rickMortyApp.view.pages
 
 
 import android.os.Bundle
@@ -10,19 +10,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.Adaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
 import com.example.rickMortyApp.network.Character
 import com.example.rickMortyApp.ulti.ScreenState
-import com.example.rickMortyApp.viewmodel.MainViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.rickMortyApp.viewmodel.CharacterViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
 class FirstFragment : Fragment()  {
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+    private val viewModel: CharacterViewModel by lazy {
+        ViewModelProvider(this)[CharacterViewModel::class.java]
     }
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
@@ -42,9 +42,6 @@ class FirstFragment : Fragment()  {
         viewModel.characterLiveData.observe(viewLifecycleOwner) { state ->
             processCharacterResponse(state)
         }
-
-
-
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -57,6 +54,7 @@ class FirstFragment : Fragment()  {
                 pd.visibility = View.VISIBLE
             }
             is ScreenState.Success -> {
+                pd.visibility = View.GONE
                 if (state.data != null){
                     val adaptor = Adaptor(state.data)
                     val recyclerView = binding.recycleViewItems
@@ -80,7 +78,8 @@ class FirstFragment : Fragment()  {
                             val dataEpisode = state.data[position].episode
                             println("dataName $dataEpisode")
 
-                            findNavController().navigate(R.id.pageDetail, bundleOf(
+                            findNavController().navigate(
+                                R.id.pageDetail, bundleOf(
                                 "name" to dataName,
                                 "image" to dataImage,
                                 "species" to dataSpecies,

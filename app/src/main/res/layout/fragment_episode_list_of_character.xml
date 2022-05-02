@@ -4,13 +4,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.detailPage.episode.EpisodeDetailPage">
+    tools:context=".view.detailPage.episode.EpisodeListOfCharacter">
 
-    <ScrollView
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
+        <LinearLayout
+            android:id="@+id/LayoutTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:elevation="1sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <ImageView
+                android:id="@+id/image_arrow_EpiCharacter"
+                android:layout_width="32sp"
+                android:layout_height="32sp"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="16sp"
+                android:onClick="hello"
+                android:src="@drawable/ic_back_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UsingOnClickInXml" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="16sp"
+                android:fontFamily="sans-serif-thin"
+                android:text="Character Details"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/epiCharacter_image"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/image_detail" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,48 +65,16 @@
             android:layout_marginHorizontal="16sp"
             android:layout_marginTop="5sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/LayoutTop"
+            app:layout_constraintTop_toBottomOf="@id/epiCharacter_image"
             >
-            <LinearLayout
-                android:id="@+id/LayoutTop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="UseCompoundDrawables">
-
-                <ImageView
-                    android:id="@+id/image_arrow_episode"
-                    android:layout_width="32sp"
-                    android:layout_height="32sp"
-                    android:layout_marginStart="16sp"
-                    android:layout_marginTop="16sp"
-                    android:src="@drawable/ic_back_arrow"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="TODO" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16sp"
-                    android:layout_marginTop="16sp"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="@string/episode_details"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
             <TextView
-                android:id="@+id/textEp_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16sp"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/black"
-                android:text="@string/pilot"
+                android:id="@+id/epiCharacter_name"
+                android:text="Name"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,29 +87,41 @@
                 app:layout_constraintTop_toTopOf="parent"
                 >
                 <TextView
-                    android:id="@+id/textEp_Episode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5sp"
+                    android:id="@+id/epiCharacter_gender"
+                    android:text="gender"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/s01e01"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
-                    android:id="@+id/textEp_airDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5sp"
+                    android:id="@+id/epiCharacter_status"
                     android:fontFamily="sans-serif-thin"
-                    android:text="@string/december_2_2013"
+                    android:text="status"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="right"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:id="@+id/epiCharacter_species"
+                android:fontFamily="sans-serif-thin"
+                android:text="species"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="left"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <TextView
                 android:id="@+id/textEp_des"
                 android:layout_width="match_parent"
@@ -107,7 +134,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
-                android:id="@+id/textEp_url"
+                android:id="@+id/epiCharacter_url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18sp"
@@ -118,7 +145,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
-                android:id="@+id/textEp_created"
+                android:id="@+id/epiCharacter_created"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
@@ -128,29 +155,8 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            <TextView
-                android:id="@+id/textEp_character"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:fontFamily="sans-serif-thin"
-                android:text="@string/episode"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle_characters_in_episode_details"
-                android:layout_marginTop="15sp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_episode_details"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
-    </ScrollView>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </FrameLayout>
