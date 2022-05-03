@@ -54,6 +54,7 @@ class EpisodeAdaptor(private val episodeList: List<EpisodeData>): RecyclerView.A
         return episodeList.size
     }
 
+
 }
 
 

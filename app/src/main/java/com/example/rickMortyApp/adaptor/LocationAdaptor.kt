@@ -92,3 +92,42 @@ class ResidentAdaptor(private val residentList: List<Character>): RecyclerView.A
     }
 
 }
+
+class StringAdapter(private val stringList: List<String>, private val action: (String) -> Unit): RecyclerView.Adapter<StringAdapter.MainViewHolder>() {
+
+    private var lastView: com.google.android.material.chip.Chip? = null
+
+    inner class MainViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
+        fun bindData(value: String){
+
+            with(itemView.findViewById<com.google.android.material.chip.Chip>(R.id.item)){
+                setOnClickListener {
+                    if(lastView?.text == text) {
+                        action("")
+                        return@setOnClickListener
+                    }
+
+                    lastView?.isChecked = false
+                    isChecked = true
+                    lastView = this
+                    action(value)
+                }
+                text = value
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_chip , parent ,false)
+        return MainViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        return holder.bindData( stringList[position])
+    }
+
+    override fun getItemCount(): Int {
+        return stringList.size
+    }
+
+}

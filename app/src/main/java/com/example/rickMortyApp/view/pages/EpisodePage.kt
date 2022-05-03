@@ -2,8 +2,12 @@ package com.example.rickMortyApp.view.pages
 
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.contains
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,10 +15,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.EpisodeAdaptor
 import com.example.rickMortyApp.databinding.FragmentEpisodePageBinding
+import com.example.rickMortyApp.network.ApiClient
 import com.example.rickMortyApp.network.EpisodeData
+import com.example.rickMortyApp.network.EpisodeResponse
 import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.EpisodeViewModel
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class EpisodePage : Fragment() {
@@ -58,7 +67,6 @@ class EpisodePage : Fragment() {
                     recyclerView?.layoutManager =
                         LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
                     recyclerView?.adapter = adaptor
-
 
                     adaptor.setOnItemClickListener(object : EpisodeAdaptor.OnItemClickListener{
                         override fun onItemClick(position: Int) {

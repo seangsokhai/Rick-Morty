@@ -34,6 +34,11 @@ interface ApiService{
 
     @GET("location")
     fun fetchLocation(@Query("page") page:String): Call<LocationResponse>
+    @GET("location")
+    fun fetchFilterLocation(@Query("page") page: String,
+                            @Query("type") type: String,
+                            @Query("dimension") dimension: String
+                            ) : Call<LocationResponse>
 
 
     @GET("episode/")

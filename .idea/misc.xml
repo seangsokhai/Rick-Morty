@@ -22,18 +22,23 @@
         <entry key="..\:/Users/saiho/Desktop/RickMortyapp/app/src/main/res/layout/location_detail_page.xml" value="0.1" />
         <entry key="..\:/Users/saiho/Desktop/RickMortyapp/app/src/main/res/menu/bottom_nav_bar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/saiho/Desktop/RickMortyapp/app/src/main/res/menu/menu_main.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.181" />
         <entry key="app/src/main/res/drawable/bg_search.xml" value="0.1925" />
+        <entry key="app/src/main/res/drawable/ic_back_arrow.xml" value="0.181" />
+        <entry key="app/src/main/res/drawable/ic_episode.xml" value="0.181" />
         <entry key="app/src/main/res/drawable/ic_fame1.xml" value="0.1925" />
+        <entry key="app/src/main/res/drawable/ic_location.xml" value="0.181" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.18541666666666667" />
-        <entry key="app/src/main/res/layout/fragment_episode_detail_page.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_episode_detail_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_episode_list_of_character.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/fragment_episode_page.xml" value="0.3265625" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_location_detail_page.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_location_page.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_location_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_page_detail.xml" value="0.3265625" />
         <entry key="app/src/main/res/layout/fragment_residents_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_chip.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/item_custom_row.xml" value="0.3265625" />
         <entry key="app/src/main/res/layout/item_episode_details.xml" value="0.1852355072463768" />
         <entry key="app/src/main/res/layout/item_episode_page.xml" value="0.33177083333333335" />
