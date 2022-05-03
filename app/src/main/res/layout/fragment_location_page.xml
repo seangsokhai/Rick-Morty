@@ -35,79 +35,62 @@ android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="0sp"
+            android:layout_marginTop="5sp"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_text">
 
-            <Button
-                android:id="@+id/button2"
+            <TextView
+                android:id="@+id/buttonType"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="0sp"
+                android:gravity="center"
                 android:layout_weight="1"
                 android:layout_marginStart="5sp"
-                android:backgroundTint="@color/primary"
+                android:background="@color/primary"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="Type" />
-            <Button
-                android:id="@+id/button"
+                android:text="Type"
+                />
+            <TextView
+                android:id="@+id/buttonDimension"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="12sp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:backgroundTint="@color/primary"
+                android:backgroundTint="@color/white"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginStart="5sp"
-                android:text="Dimention" />
-        </LinearLayout>
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:singleSelection="true"
-                >
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_1"
-                    style="@style/customChipBg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="type1"/>
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="type2"/>
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_3"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="type3"/>
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_4"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="140sp"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="type4"/>
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_5"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="type5"/>
+                android:text="Dimension"
+                />
 
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chip_type_recycler_view"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            tools:itemCount="10"
+            android:layout_marginStart="5sp"
+            android:background="@color/grey"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_chip"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chip_dimension_recycler_view"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:itemCount="10"
+            android:layout_marginStart="5sp"
+            android:background="@color/grey"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_chip"
+            android:layout_height="wrap_content"/>
         <ProgressBar
             android:id="@+id/process_bar_location_page"
             android:layout_width="wrap_content"

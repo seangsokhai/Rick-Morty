@@ -33,13 +33,11 @@
                     android:id="@+id/image_arrow_episode"
                     android:layout_width="32sp"
                     android:layout_height="32sp"
-                    android:layout_marginStart="16sp"
                     android:layout_marginTop="16sp"
                     android:src="@drawable/ic_back_arrow"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:contentDescription="TODO" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
