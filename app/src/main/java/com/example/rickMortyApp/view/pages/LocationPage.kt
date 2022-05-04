@@ -56,12 +56,10 @@ class LocationPage : Fragment() {
         }
 
         binding.chipTypeRecyclerView.adapter = StringAdapter(Constants.types, action = { value ->
-            println(">>> valueT $value")
             filterLocation(value , "")
         })
 
         binding.chipDimensionRecyclerView.adapter = StringAdapter(Constants.dimension, action = { value ->
-            println(">>> valueD $value")
             filterLocation("", value)
         })
 

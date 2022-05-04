@@ -3,11 +3,8 @@ package com.example.rickMortyApp.view.pages
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.contains
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,6 +41,8 @@ class EpisodePage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         viewModel.episodeLiveData.observe(viewLifecycleOwner) { state ->
             processLocationResponse(state)

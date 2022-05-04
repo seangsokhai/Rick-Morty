@@ -63,7 +63,7 @@ class LocationDetailPage : Fragment() {
             for (i in listResidents){
                 val getLastID = i.split("/")[5]
                 println(">>>>>>>> $getLastID")
-                val client = ApiClient.apiService.fetchSingleCharacter("$getLastID")
+                val client = ApiClient.apiService.fetchCharacter("$getLastID")
                 client.enqueue(object : Callback<CharacterResponse> {
                     override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {1
                         throw(Error("Character: ${t.message.toString()}"))

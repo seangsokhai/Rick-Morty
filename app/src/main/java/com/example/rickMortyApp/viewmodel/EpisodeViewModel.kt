@@ -24,6 +24,7 @@ class EpisodeViewModel(private val repository: Repository = Repository(ApiClient
     }
 
     private fun fetchEpisode(){
+
         viewModelScope.launch {
             val client = repository.getEpisode("1")
 
@@ -37,7 +38,6 @@ class EpisodeViewModel(private val repository: Repository = Repository(ApiClient
                     call: Call<EpisodeResponse>,
                     response: Response<EpisodeResponse>
                 ) {
-                    print("hallo25636 $response")
                     if (response.isSuccessful){
                         _episodeLiveData.postValue(ScreenState.Success(response.body()?.results))
                     } else {

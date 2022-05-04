@@ -64,7 +64,7 @@ class EpisodeDetailPage : Fragment() {
             for (i in listCharacter){
                 val getID = i.split("/")[5]
                 println(">>>>>>>> $getID")
-                val client = ApiClient.apiService.fetchSingleCharacter("$getID")
+                val client = ApiClient.apiService.fetchCharacter("$getID")
                 client.enqueue(object : Callback<CharacterResponse> {
                     override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
                         throw(Error("Character: ${t.message.toString()}"))

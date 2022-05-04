@@ -22,7 +22,6 @@ class LocationViewModel(private val repository: Repository = Repository(ApiClien
         fetchLocation()
     }
     private fun fetchLocation(){
-
         viewModelScope.launch {
             val client = repository.getLocation("1")
             println("location ${client.request()}")
@@ -48,4 +47,5 @@ class LocationViewModel(private val repository: Repository = Repository(ApiClien
         }
 
     }
+
 }
