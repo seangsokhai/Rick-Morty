@@ -13,14 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.Adaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
+import com.example.rickMortyApp.di.TempData
 import com.example.rickMortyApp.network.Character
 import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.CharacterViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class FirstFragment : Fragment()  {
-
+    @Inject lateinit var tempData: TempData
     private val viewModel: CharacterViewModel by lazy {
         ViewModelProvider(this)[CharacterViewModel::class.java]
     }
@@ -39,9 +42,12 @@ class FirstFragment : Fragment()  {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.characterLiveData.observe(viewLifecycleOwner) { state ->
             processCharacterResponse(state)
+
         }
+        tempData.show()
     }
     override fun onDestroyView() {
         super.onDestroyView()

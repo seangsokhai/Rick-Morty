@@ -1,10 +1,9 @@
 package com.example.rickMortyApp.network
 
+
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -43,13 +42,13 @@ interface ApiService{
                             @Query("dimension") dimension: String
                             ) : Call<LocationResponse>
 
-
     @GET("episode/")
     fun fetchEpisode(@Query("page") page:String): Call<EpisodeResponse>
+
+
     @GET("episode/")
     fun fetchSearchEpisode(@Query("page") page:String,
                            @Query("name") name:String
-
     ): Call<EpisodeResponse>
 
 }

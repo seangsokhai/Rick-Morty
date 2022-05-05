@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.rickMortyApp.network.*
+
+import com.example.rickMortyApp.network.ApiClient
+import com.example.rickMortyApp.network.Character
+import com.example.rickMortyApp.network.CharacterResponse
 import com.example.rickMortyApp.repository.Repository
 import com.example.rickMortyApp.ulti.ScreenState
 import kotlinx.coroutines.launch
@@ -14,7 +17,7 @@ import retrofit2.Response
 
 
 class CharacterViewModel(private val repository: Repository = Repository(ApiClient.apiService)) : ViewModel() {
-    private val _characterLiveData = MutableLiveData<ScreenState<List<Character>?>> ()
+    private val _characterLiveData = MutableLiveData<ScreenState<List<com.example.rickMortyApp.network.Character>?>> ()
     val characterLiveData: LiveData<ScreenState<List<Character>?>>
         get() = _characterLiveData
 
@@ -25,7 +28,6 @@ class CharacterViewModel(private val repository: Repository = Repository(ApiClie
     private fun fetchCharacter(){
         viewModelScope.launch {
             val client = repository.getCharacter("1")
-
             _characterLiveData.postValue(ScreenState.Loading(null))
             client.enqueue(object : Callback<CharacterResponse>{
                 override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {1

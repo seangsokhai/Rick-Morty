@@ -4,6 +4,7 @@ package com.example.rickMortyApp.adaptor
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,9 +12,13 @@ import coil.load
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.network.Character
 import com.example.rickMortyApp.network.EpisodeData
+import java.lang.reflect.Array
+import java.util.*
+import kotlin.collections.ArrayList
 
 class EpisodeAdaptor(private val episodeList: List<EpisodeData>): RecyclerView.Adapter<EpisodeAdaptor.MainViewHolder>() {
     private  lateinit var mListener: OnItemClickListener
+    private var episodeFilterList = episodeList
 
     interface OnItemClickListener{
         fun onItemClick(position: Int)
@@ -53,9 +58,37 @@ class EpisodeAdaptor(private val episodeList: List<EpisodeData>): RecyclerView.A
     override fun getItemCount(): Int {
         return episodeList.size
     }
-
-
+//    fun getFilter(): Filter {
+//        return object : Filter() {
+//            override fun performFiltering(constraint: CharSequence?): FilterResults {
+//                val charSearch = constraint.toString()
+//                if (charSearch.isEmpty()) {
+//                    episodeFilterList = episodeList
+//                } else {
+//                    val resultList = listOf<String>()
+//                    for (row in episodeList) {
+//                        if (row.name.lowercase(Locale.ROOT).contains(charSearch.lowercase(Locale.ROOT))) {
+//                            resultList.add(row)
+//                        }
+//                    }
+//                    episodeFilterList = resultList
+//                }
+//                val filterResults = FilterResults()
+//                filterResults.values = episodeFilterList
+//                return filterResults
+//            }
+//
+//            @Suppress("UNCHECKED_CAST")
+//            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+//                episodeFilterList = results?.values as List<EpisodeData>
+//                notifyDataSetChanged()
+//            }
+//
+//        }
+//    }
 }
+
+
 
 
 class EpisodeListCharacterAdaptor(private val residentList: List<Character>): RecyclerView.Adapter<EpisodeListCharacterAdaptor.MainViewHolder>() {

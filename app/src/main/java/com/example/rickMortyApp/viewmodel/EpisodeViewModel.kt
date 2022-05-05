@@ -24,7 +24,6 @@ class EpisodeViewModel(private val repository: Repository = Repository(ApiClient
     }
 
     private fun fetchEpisode(){
-
         viewModelScope.launch {
             val client = repository.getEpisode("1")
 
@@ -48,6 +47,4 @@ class EpisodeViewModel(private val repository: Repository = Repository(ApiClient
         }
 
     }
-
-
 }

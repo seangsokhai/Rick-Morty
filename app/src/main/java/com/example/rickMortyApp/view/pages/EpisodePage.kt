@@ -21,6 +21,8 @@ import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class EpisodePage : Fragment() {
@@ -49,6 +51,7 @@ class EpisodePage : Fragment() {
         }
 
     }
+
 
     private fun processLocationResponse(state: ScreenState<List<EpisodeData>?>){
         val pb = binding.processBarEpisodePage
