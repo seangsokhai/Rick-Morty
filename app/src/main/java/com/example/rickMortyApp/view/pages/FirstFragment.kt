@@ -7,26 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.Adaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
-import com.example.rickMortyApp.di.TempData
 import com.example.rickMortyApp.network.Character
 import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.CharacterViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class FirstFragment : Fragment()  {
-    @Inject lateinit var tempData: TempData
     private val viewModel: CharacterViewModel by lazy {
         ViewModelProvider(this)[CharacterViewModel::class.java]
     }
+//    private val vm : CharacterViewModel by viewModels()
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
 
@@ -42,12 +44,9 @@ class FirstFragment : Fragment()  {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.characterLiveData.observe(viewLifecycleOwner) { state ->
             processCharacterResponse(state)
-
         }
-        tempData.show()
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -110,5 +109,49 @@ class FirstFragment : Fragment()  {
 }
 
 
+
+//
+//viewLifecycleOwner.lifecycleScope.launch {
+//    vm.fetchCharacterDI()?.let {
+//        val adaptor = Adaptor(it.results)
+//        val recyclerView = binding.recycleViewItems
+//        recyclerView.layoutManager =
+//            LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+//        recyclerView.adapter = adaptor
+//        adaptor.setOnItemClickListener(object : Adaptor.OnItemClickListener{
+//            override fun onItemClick(position: Int) {
+//                val dataName = it.results[position].name
+//                val dataImage = it.results[position].image
+//                val dataSpecies = it.results[position].species
+//                val dataGender = it.results[position].gender
+//                val dataCreated = it.results[position].created
+//                val dataStatus = it.results[position].status
+//                val dataUrl = it.results[position].url
+//                ///fetch data location
+//                val dataLocation = it.results[position].location
+//                val dataNameLocation = dataLocation.name
+//                val dataUrlLocation = dataLocation.url
+//                // episode list of string
+//                val dataEpisode = it.results[position].episode
+//
+//                findNavController().navigate(
+//                    R.id.pageDetail, bundleOf(
+//                        "name" to dataName,
+//                        "image" to dataImage,
+//                        "species" to dataSpecies,
+//                        "gender" to dataGender,
+//                        "created" to dataCreated,
+//                        "status" to dataStatus,
+//                        "urlLocation" to dataUrlLocation,
+//                        "nameLocation" to dataNameLocation,
+//                        "url" to dataUrl,
+//                        "episode" to dataEpisode.toTypedArray()
+//                    )
+//                )}
+//        })
+//    }
+//}
+//
+//
 
 

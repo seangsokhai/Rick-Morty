@@ -10,13 +10,19 @@ import com.example.rickMortyApp.network.Character
 import com.example.rickMortyApp.network.CharacterResponse
 import com.example.rickMortyApp.repository.Repository
 import com.example.rickMortyApp.ulti.ScreenState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+
+//@HiltViewModel
+//class CharacterViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
+//    suspend fun fetchCharacterDI(page: String = "1") = repo.getCharacterDI(page)
 
 
-class CharacterViewModel(private val repository: Repository = Repository(ApiClient.apiService)) : ViewModel() {
+    class CharacterViewModel(private val repository: Repository = Repository(ApiClient.apiService)) : ViewModel() {
     private val _characterLiveData = MutableLiveData<ScreenState<List<com.example.rickMortyApp.network.Character>?>> ()
     val characterLiveData: LiveData<ScreenState<List<Character>?>>
         get() = _characterLiveData
