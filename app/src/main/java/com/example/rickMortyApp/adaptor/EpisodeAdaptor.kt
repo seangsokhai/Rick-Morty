@@ -18,7 +18,6 @@ import kotlin.collections.ArrayList
 
 class EpisodeAdaptor(private val episodeList: List<EpisodeData>): RecyclerView.Adapter<EpisodeAdaptor.MainViewHolder>() {
     private  lateinit var mListener: OnItemClickListener
-    private var episodeFilterList = episodeList
 
     interface OnItemClickListener{
         fun onItemClick(position: Int)

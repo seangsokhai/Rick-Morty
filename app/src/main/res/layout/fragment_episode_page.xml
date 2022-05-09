@@ -34,7 +34,10 @@ android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15sp"
+                android:visibility="visible"
+                android:iconifiedByDefault="false"
                 android:background="@drawable/bg_search"
+
                 />
         <ProgressBar
             android:id="@+id/process_bar_episode_page"

@@ -8,15 +8,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickMortyApp.R
+import com.example.rickMortyApp.adaptor.EpisodeListCharacterAdaptor
 import com.example.rickMortyApp.adaptor.ResidentAdaptor
 import com.example.rickMortyApp.databinding.FragmentLocationDetailPageBinding
 import com.example.rickMortyApp.network.ApiClient
 import com.example.rickMortyApp.network.CharacterResponse
+import com.example.rickMortyApp.viewmodel.CharacterViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,6 +29,7 @@ import retrofit2.Response
 
 
 class LocationDetailPage : Fragment() {
+    private val vm : CharacterViewModel by viewModels()
     private var _binding: FragmentLocationDetailPageBinding? = null
     private val arg : LocationDetailPageArgs by navArgs()
     private val binding get() = _binding!!
@@ -56,8 +60,34 @@ class LocationDetailPage : Fragment() {
         view.findViewById<TextView>(R.id.textLc_type).text = arg.type
 
         val listResidents = arg.residents.toList().take(5)
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            for (i in listResidents) {
+//                val getID = i.split("/")[5]
+//                vm.fetchResidentCharacters(getID).let {
+//                    val adaptor = ResidentAdaptor(it!!.results)
+//                    val recyclerView = binding.recycleLocationDetailResidents
+//                    recyclerView.layoutManager =
+//                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+//                    recyclerView.adapter = adaptor
+//                    adaptor.setOnItemClickListener(object : ResidentAdaptor.OnItemClickListener{
+//                        override fun onItemClick(position: Int) {
+//                            findNavController().navigate(
+//                                R.id.residentsDetail, bundleOf(
+//                                    "name" to it.results[position].name,
+//                                    "created" to it.results[position].created,
+//                                    "url" to it.results[position].url,
+//                                    "status" to it.results[position].status,
+//                                    "species" to it.results[position].species,
+//                                    "gender" to it.results[position].gender,
+//                                    "image" to it.results[position].image
+//                                )
+//                            )
+//                        }
+//                    })
+//
+//                }
+//            }
 
-        println(">> size ${listResidents}")
 
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             for (i in listResidents){

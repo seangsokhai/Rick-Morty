@@ -10,8 +10,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-//@Module
-//@InstallIn(SingletonComponent::class)
 object ApiClient {
     private const val BASE_URl = "https://rickandmortyapi.com/api/"
     private val moshi = Moshi.Builder()
@@ -27,14 +25,18 @@ object ApiClient {
     }
 
 }
-
 interface ApiService{
-    //create method to tell server send us those character
-    @GET("character")
-    fun fetchCharacter(@Query("page") page:String): Call<CharacterResponse>
 
-    @GET("location")
-    fun fetchLocation(@Query("page") page:String): Call<LocationResponse>
+    //create method to tell server send us those character
+        @GET("character")
+        fun fetchCharacter(@Query("page") page:String): Call<CharacterResponse>
+
+
+        @GET("location")
+        fun fetchLocation(@Query("page") page:String): Call<LocationResponse>
+//
+//    @GET("location")
+//    fun fetchLocation(@Query("page") page:String): LocationResponse
 
     @GET("location")
     fun fetchFilterLocation(@Query("page") page: String,
@@ -42,13 +44,7 @@ interface ApiService{
                             @Query("dimension") dimension: String
                             ) : Call<LocationResponse>
 
-    @GET("episode/")
-    fun fetchEpisode(@Query("page") page:String): Call<EpisodeResponse>
-
 
     @GET("episode/")
-    fun fetchSearchEpisode(@Query("page") page:String,
-                           @Query("name") name:String
-    ): Call<EpisodeResponse>
-
+    suspend fun fetchEpisode(@Query("page") page:String): EpisodeResponse
 }

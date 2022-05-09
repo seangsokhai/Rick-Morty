@@ -6,11 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.rickMortyApp.R
+import com.example.rickMortyApp.adaptor.EpisodeAdaptor
 import com.example.rickMortyApp.adaptor.LocationAdaptor
 import com.example.rickMortyApp.adaptor.StringAdapter
 import com.example.rickMortyApp.databinding.FragmentLocationPageBinding
@@ -19,15 +24,21 @@ import com.example.rickMortyApp.network.LocationData
 import com.example.rickMortyApp.network.LocationResponse
 import com.example.rickMortyApp.ulti.Constants
 import com.example.rickMortyApp.ulti.ScreenState
+import com.example.rickMortyApp.viewmodel.EpisodeViewModel
 import com.example.rickMortyApp.viewmodel.LocationViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
+@AndroidEntryPoint
 class LocationPage : Fragment() {
     private val viewModel: LocationViewModel by lazy {
         ViewModelProvider(this)[LocationViewModel::class.java]
     }
+    private val vm: LocationViewModel by viewModels()
     private var _binding: FragmentLocationPageBinding? = null
     private val binding get() = _binding!!
 
@@ -60,6 +71,7 @@ class LocationPage : Fragment() {
         binding.chipDimensionRecyclerView.adapter = StringAdapter(Constants.dimension, action = { value ->
             filterLocation("", value)
         })
+
 
         viewModel.locationLiveData.observe(viewLifecycleOwner) { state ->
             processLocationResponse(state)
@@ -167,3 +179,32 @@ class LocationPage : Fragment() {
         }
     }
 }
+
+//
+//viewLifecycleOwner.lifecycleScope.launch {
+//    val pb = binding.processBarLocationPage
+//    pb.visibility = View.GONE
+//    vm.fetchLocation()?.let{
+//        val adaptor = LocationAdaptor(it.results)
+//        val recyclerView = view.findViewById<RecyclerView>(R.id.recycle_location_items)
+//
+//        recyclerView?.layoutManager =
+//            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//        recyclerView?.adapter = adaptor
+//
+//        adaptor.setOnItemClickListener(object : LocationAdaptor.OnItemClickListener {
+//            override fun onItemClick(position: Int) {
+//                findNavController().navigate(
+//                    R.id.locationDetailPage, bundleOf(
+//                        "name" to it.results[position].name,
+//                        "created" to it.results[position].created,
+//                        "url" to it.results[position].url,
+//                        "type" to it.results[position].type,
+//                        "dimension" to it.results[position].dimension,
+//                        "residents" to it.results[position].residents.toTypedArray()
+//                    )
+//                )
+//            }
+//        })
+//    }
+//}

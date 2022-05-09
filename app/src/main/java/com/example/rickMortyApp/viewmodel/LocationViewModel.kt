@@ -7,13 +7,22 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickMortyApp.network.*
 import com.example.rickMortyApp.repository.Repository
 import com.example.rickMortyApp.ulti.ScreenState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 
-class LocationViewModel(private val repository: Repository = Repository(ApiClient.apiService)) : ViewModel() {
+
+class LocationViewModel(private val repository: Repository = Repository(ApiClient.apiService))  : ViewModel() {
+
+//@HiltViewModel
+//class LocationViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
+//    suspend fun fetchLocation(page: String = "1") = repo.getLocation(page)
+
+
     private val _locationLiveData = MutableLiveData<ScreenState<List<LocationData>?>>()
     val locationLiveData: LiveData<ScreenState<List<LocationData>?>>
         get() = _locationLiveData
