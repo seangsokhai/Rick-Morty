@@ -33,7 +33,7 @@ import retrofit2.Response
 
 @AndroidEntryPoint
 class EpisodeDetailPage : Fragment() {
-    //private val vm : EpisodeViewModel by viewModels()
+    private val vm : CharacterViewModel by viewModels()
     private var _binding: FragmentEpisodeDetailPageBinding? = null
     private val args: EpisodeDetailPageArgs by navArgs()
     private val binding get() = _binding!!
@@ -65,7 +65,6 @@ class EpisodeDetailPage : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
             for (i in listCharacter){
                 val getID = i.split("/")[5]
-                println(">>>>>>>> $getID")
                 val client = ApiClient.apiService.fetchCharacter("$getID")
                 client.enqueue(object : Callback<CharacterResponse> {
                     override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
@@ -112,38 +111,32 @@ class EpisodeDetailPage : Fragment() {
                 })
             }
         }
-
     }
-
 }
 
-//viewLifecycleOwner.lifecycleScope.launch {
-//    for (i in listCharacter) {
-//        val getID = i.split("/")[5]
-//        vm.fetchEpisodeCharacters(getID).let {
-//            val adaptor = EpisodeListCharacterAdaptor(it!!.results)
-//            val recyclerView = binding.recycleCharactersInEpisodeDetails
-//            recyclerView.layoutManager =
-//                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//            recyclerView.adapter = adaptor
-//            adaptor.setOnItemClickListener(object :
-//                EpisodeListCharacterAdaptor.OnItemClickListener {
-//                override fun onItemClick(position: Int) {
-//                    findNavController().navigate(
-//                        R.id.residentsDetail, bundleOf(
-//                            "name" to it.results[position].name,
-//                            "created" to it.results[position].created,
-//                            "url" to it.results[position].url,
-//                            "status" to it.results[position].status,
-//                            "species" to it.results[position].species,
-//                            "gender" to it.results[position].gender,
-//                            "image" to it.results[position].image
-//                        )
-//                    )
-//                }
-//            })
 //
+//vm.fetchCharacter(getID)?.let {
+//    val adaptor = EpisodeListCharacterAdaptor(it.results!!)
+//    val recyclerView = binding.recycleCharactersInEpisodeDetails
+//    recyclerView.layoutManager =
+//        LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+//    recyclerView.adapter = adaptor
+//    adaptor.setOnItemClickListener(object : EpisodeListCharacterAdaptor.OnItemClickListener{
+//        override fun onItemClick(position: Int) {
+//            findNavController().navigate(
+//                R.id.residentsDetail, bundleOf(
+//                    "name" to it.results[position].name,
+//                    "created" to it.results[position].created,
+//                    "url" to it.results[position].url,
+//                    "status" to it.results[position].status,
+//                    "species" to it.results[position].species,
+//                    "gender" to it.results[position].gender,
+//                    "image" to it.results[position].image
+//                )
+//            )
 //        }
-//    }
+//    })
 //}
+
+
 

@@ -8,6 +8,7 @@
     android:background="@color/white"
 
     >
+
     <ProgressBar
         android:id="@+id/process_bar"
         android:layout_width="wrap_content"
@@ -22,6 +23,7 @@
         android:orientation="vertical"
         android:layout_marginHorizontal="15sp"
         >
+
         <TextView
             android:layout_marginTop="15sp"
             android:layout_width="match_parent"
@@ -36,6 +38,16 @@
             android:gravity="center_vertical"
             android:textSize="16sp"
             android:text="@string/watch_your_movie"/>
+        <SearchView
+            android:id="@+id/search_view_character_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:visibility="gone"
+            android:iconifiedByDefault="false"
+            android:queryHint="search character ..."
+            android:background="@drawable/bg_search"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_items"

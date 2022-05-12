@@ -36,6 +36,7 @@ android:background="@color/white"
                 android:layout_marginTop="15sp"
                 android:visibility="visible"
                 android:iconifiedByDefault="false"
+                android:queryHint="search episode ..."
                 android:background="@drawable/bg_search"
 
                 />

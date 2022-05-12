@@ -24,9 +24,10 @@
         <item name="android:textColor">@color/chip_txt_color</item>
     </style>
 
-
+    <style name="Theme.SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/ic__d3227740d5d64067d58f85c9ba1cc4c__1_</item>
+    </style>
 
     <style name="Theme.RickMortyApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="Theme.RickMortyApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
