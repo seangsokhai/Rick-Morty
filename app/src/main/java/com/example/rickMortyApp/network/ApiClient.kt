@@ -28,23 +28,36 @@ object ApiClient {
 interface ApiService{
 
     //create method to tell server send us those character
-        @GET("character")
-        fun fetchCharacter(@Query("page") page:String): Call<CharacterResponse>
+    @GET("character")
+   fun fetchCharacter(@Query("page") page:String): Call<CharacterResponse>
+
+    @GET("character/")
+    suspend fun fetchCharacterSuspend(@Query("page") page:String): CharacterResponse
+
+    @GET("character")
+    fun fetchFilterCharacter(@Query("page") page:String,
+        @Query("name") name:String
+    ): Call<CharacterResponse>
 
 
-        @GET("location")
-        fun fetchLocation(@Query("page") page:String): Call<LocationResponse>
-//
 //    @GET("location")
-//    fun fetchLocation(@Query("page") page:String): LocationResponse
+//        fun fetchLocation(@Query("page") page:String): Call<LocationResponse>
+
+    @GET("location/")
+    suspend fun fetchLocation(@Query("page") page:String): LocationResponse
 
     @GET("location")
-    fun fetchFilterLocation(@Query("page") page: String,
+    suspend fun fetchFilterLocation(@Query("page") page: String,
                             @Query("type") type: String,
                             @Query("dimension") dimension: String
-                            ) : Call<LocationResponse>
+                            ) : LocationResponse
 
 
     @GET("episode/")
     suspend fun fetchEpisode(@Query("page") page:String): EpisodeResponse
+
+    @GET("episode")
+    suspend fun fetchFilterEpisode(@Query("page") page:String,
+                                    @Query("name") name: String
+                                ): EpisodeResponse
 }

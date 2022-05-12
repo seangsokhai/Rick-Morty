@@ -1,23 +1,17 @@
 package com.example.rickMortyApp.viewmodel
 
-import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.rickMortyApp.network.*
 import com.example.rickMortyApp.repository.Repository
-import com.example.rickMortyApp.ulti.ScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class EpisodeViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     suspend fun fetchEpisode(page: String = "1") = repo.getEpisodes(page)
+    suspend fun fetchFilterEpisode(page: String , name: String) = repo.getFilterEpisodes(page, name)
+}
+
 
 
 //    private val _episodeLiveData = MutableLiveData<ScreenState<List<EpisodeData>?>> ()
@@ -51,5 +45,3 @@ class EpisodeViewModel @Inject constructor(private val repo: Repository) : ViewM
 //            })
 //        }
 //    }
-
-}

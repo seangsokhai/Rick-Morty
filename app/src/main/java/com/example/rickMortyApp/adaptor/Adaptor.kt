@@ -47,8 +47,6 @@ class Adaptor(private val characterList: List<Character>): RecyclerView.Adapter<
                 transformations()
             }
 
-            //adapt view with model json
-
         }
     }
 

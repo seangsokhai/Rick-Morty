@@ -60,98 +60,50 @@ class LocationDetailPage : Fragment() {
         view.findViewById<TextView>(R.id.textLc_type).text = arg.type
 
         val listResidents = arg.residents.toList().take(5)
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            for (i in listResidents) {
-//                val getID = i.split("/")[5]
-//                vm.fetchResidentCharacters(getID).let {
-//                    val adaptor = ResidentAdaptor(it!!.results)
-//                    val recyclerView = binding.recycleLocationDetailResidents
-//                    recyclerView.layoutManager =
-//                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-//                    recyclerView.adapter = adaptor
-//                    adaptor.setOnItemClickListener(object : ResidentAdaptor.OnItemClickListener{
-//                        override fun onItemClick(position: Int) {
-//                            findNavController().navigate(
-//                                R.id.residentsDetail, bundleOf(
-//                                    "name" to it.results[position].name,
-//                                    "created" to it.results[position].created,
-//                                    "url" to it.results[position].url,
-//                                    "status" to it.results[position].status,
-//                                    "species" to it.results[position].species,
-//                                    "gender" to it.results[position].gender,
-//                                    "image" to it.results[position].image
-//                                )
-//                            )
-//                        }
-//                    })
-//
-//                }
-//            }
-
-
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            for (i in listResidents){
-                val getLastID = i.split("/")[5]
-                println(">>>>>>>> $getLastID")
-                val client = ApiClient.apiService.fetchCharacter("$getLastID")
+        println(">>> listf $listResidents")
+        for (i in listResidents) {
+            val getID = i.split("/")[5].toInt()
+            viewLifecycleOwner.lifecycleScope.launch {
+                val client = ApiClient.apiService.fetchCharacter("$getID")
                 client.enqueue(object : Callback<CharacterResponse> {
-                    override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {1
+                    override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
                         throw(Error("Character: ${t.message.toString()}"))
                     }
+
                     override fun onResponse(
                         call: Call<CharacterResponse>,
                         response: Response<CharacterResponse>
                     ) {
                         if (response.isSuccessful){
                             val result = response.body()?.results
-                            val adaptor = ResidentAdaptor(result!!)
+                            val adaptor = EpisodeListCharacterAdaptor(result!!)
                             val recyclerView = binding.recycleLocationDetailResidents
                             recyclerView.layoutManager =
                                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
                             recyclerView.adapter = adaptor
-                            adaptor.setOnItemClickListener(object : ResidentAdaptor.OnItemClickListener{
+                            adaptor.setOnItemClickListener(object : EpisodeListCharacterAdaptor.OnItemClickListener{
                                 override fun onItemClick(position: Int) {
-                                    val name = result[position].name
-                                    val created = result[position].created
-                                    val url = result[position].url
-                                    val status = result[position].status
-                                    val species = result[position].species
-                                    val gender = result[position].gender
-                                    val image = result[position].image
-
                                     findNavController().navigate(
-                                        R.id.residentsDetail, bundleOf(
-                                            "name" to name,
-                                            "created" to created,
-                                            "url" to url,
-                                            "status" to status,
-                                            "species" to species,
-                                            "gender" to gender,
-                                            "image" to image
-                                        )
+                                    R.id.residentsDetail, bundleOf(
+                                        "name" to result[position].name,
+                                        "created" to result[position].created,
+                                        "url" to result[position].url,
+                                        "status" to result[position].status,
+                                        "species" to result[position].species,
+                                        "gender" to result[position].gender,
+                                        "image" to result[position].image
                                     )
+                                )
                                 }
                             })
 
                         }
                     }
                 })
+            }
         }
-
-        }
-
-
-
     }
-
-
 }
-
-
-// create value
-// send data to API
-// get from api
-// show in view
 
 
 
@@ -167,3 +119,25 @@ class LocationDetailPage : Fragment() {
 //            )
 //        }
 //
+
+//                    val adaptor = ResidentAdaptor(it!!.results)
+//                    println(">>> re ${it.results}")
+//                    val recyclerView = binding.recycleLocationDetailResidents
+//                    recyclerView.layoutManager =
+//                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+//                    recyclerView.adapter = adaptor
+//                    adaptor.setOnItemClickListener(object : ResidentAdaptor.OnItemClickListener{
+//                        override fun onItemClick(position: Int) {
+//                                findNavController().navigate(
+//                                    R.id.residentsDetail, bundleOf(
+//                                        "name" to it.results[position].name,
+//                                        "created" to it.results[position].created,
+//                                        "url" to it.results[position].url,
+//                                        "status" to it.results[position].status,
+//                                        "species" to it.results[position].species,
+//                                        "gender" to it.results[position].gender,
+//                                        "image" to it.results[position].image
+//                                    )
+//                                )
+//                        }
+//                    })

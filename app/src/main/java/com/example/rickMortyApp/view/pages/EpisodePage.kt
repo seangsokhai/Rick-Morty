@@ -2,6 +2,7 @@ package com.example.rickMortyApp.view.pages
 
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -18,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class EpisodePage : Fragment(){
+class EpisodePage : Fragment() , SearchView.OnQueryTextListener{
     private val vm: EpisodeViewModel by viewModels()
     private var _binding: FragmentEpisodePageBinding? = null
     private val binding get() = _binding!!
@@ -31,15 +32,13 @@ class EpisodePage : Fragment(){
         _binding = FragmentEpisodePageBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pb = binding.processBarEpisodePage
-        pb.visibility = View.VISIBLE
-
+        setupSearchView()
         viewLifecycleOwner.lifecycleScope.launch {
-            pb.visibility = View.GONE
+            binding.processBarEpisodePage.visibility = View.VISIBLE
             vm.fetchEpisode()?.let{
+                binding.processBarEpisodePage.visibility = View.GONE
                 val adaptor = EpisodeAdaptor(it.results)
                 val recyclerView = view.findViewById<RecyclerView>(R.id.recycle_view_episode_items)
                 recyclerView?.layoutManager =
@@ -61,9 +60,71 @@ class EpisodePage : Fragment(){
                 })
             }
         }
-
-
     }
+    private fun setupSearchView(){
+        val searchView: SearchView = binding.searchViewEpisodePage
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(p0: String): Boolean {
+        viewLifecycleOwner.lifecycleScope.launch {
+            binding.processBarEpisodePage.visibility = View.VISIBLE
+            vm.fetchFilterEpisode("1", p0)?.let {
+                binding.processBarEpisodePage.visibility = View.GONE
+                val adaptor = EpisodeAdaptor(it.results)
+                val recyclerView = view?.findViewById<RecyclerView>(R.id.recycle_view_episode_items)
+                recyclerView?.layoutManager =
+                    LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                recyclerView?.adapter = adaptor
+
+                adaptor.setOnItemClickListener(object : EpisodeAdaptor.OnItemClickListener{
+                    override fun onItemClick(position: Int) {
+                        findNavController().navigate(
+                            R.id.episodeDetailPage, bundleOf(
+                                "name" to it.results[position].name,
+                                "airDate" to it.results[position].air_date,
+                                "created" to it.results[position].created,
+                                "url" to it.results[position].url,
+                                "episode" to it.results[position].episode,
+                                "character" to it.results[position].characters.toTypedArray()
+                            ))
+                    }
+                })
+            }
+        }
+        return false
+    }
+
+    override fun onQueryTextChange(p0: String): Boolean {
+        viewLifecycleOwner.lifecycleScope.launch {
+            binding.processBarEpisodePage.visibility = View.VISIBLE
+            vm.fetchFilterEpisode("1", p0)?.let {
+                binding.processBarEpisodePage.visibility = View.GONE
+                val adaptor = EpisodeAdaptor(it.results)
+                val recyclerView = view?.findViewById<RecyclerView>(R.id.recycle_view_episode_items)
+                recyclerView?.layoutManager =
+                    LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                recyclerView?.adapter = adaptor
+
+                adaptor.setOnItemClickListener(object : EpisodeAdaptor.OnItemClickListener{
+                    override fun onItemClick(position: Int) {
+                        findNavController().navigate(
+                            R.id.episodeDetailPage, bundleOf(
+                                "name" to it.results[position].name,
+                                "airDate" to it.results[position].air_date,
+                                "created" to it.results[position].created,
+                                "url" to it.results[position].url,
+                                "episode" to it.results[position].episode,
+                                "character" to it.results[position].characters.toTypedArray()
+                            ))
+                    }
+                })
+            }
+        }
+        return false
+    }
+
     //        viewModel.episodeLiveData.observe(viewLifecycleOwner) { state ->
 //            processLocationResponse(state)
 //        }
