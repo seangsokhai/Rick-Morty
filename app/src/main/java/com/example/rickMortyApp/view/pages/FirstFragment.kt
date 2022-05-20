@@ -9,27 +9,21 @@ import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickMortyApp.R
 import com.example.rickMortyApp.adaptor.Adaptor
-import com.example.rickMortyApp.adaptor.EpisodeListCharacterAdaptor
 import com.example.rickMortyApp.databinding.FragmentFirstBinding
 import com.example.rickMortyApp.network.ApiClient
-import com.example.rickMortyApp.network.Character
 import com.example.rickMortyApp.network.CharacterResponse
-import com.example.rickMortyApp.ulti.ScreenState
 import com.example.rickMortyApp.viewmodel.CharacterViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FirstFragment : Fragment() , SearchView.OnQueryTextListener {
